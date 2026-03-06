@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Foodshop - Fresh Fruits, Vegetables & Food Products">
-  <meta name="theme-color" content="#3db54a">
-  <title>Foodshop</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="description"  content="Yakksh Foodstuff Trading FZE LLC — Premium Import-Export of Fresh Fruits, Vegetables and Food Products">
+  <meta name="theme-color"  content="#27ae60">
+  <meta property="og:title" content="Yakksh Foodstuff Trading FZE LLC">
+  <meta property="og:type"  content="website">
+  <title>Yakksh Foodstuff Trading FZE LLC</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
-  <style>
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-  </style>
+
+  <!-- PWA favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 </head>
 <body>
 
@@ -20,128 +26,160 @@
   BANNER
 ================================================================ -->
 <div class="banner">
-  <img id="banner-bg-img" class="banner-bg"
-    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=80"
-    alt="Banner background">
-  <div class="banner-overlay"></div>
+  <img id="banner-bg" class="banner__bg"
+    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=85"
+    alt="Fresh produce banner">
+  <div class="banner__overlay"></div>
 
-  <div class="banner-center">
-    <div class="banner-logo-circle">
-      <img id="banner-logo" src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=200&q=80" alt="Logo">
+  <div class="banner__brand">
+    <div class="brand-circle">
+      <img id="brand-logo"
+        src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=300&q=80"
+        alt="Company Logo">
     </div>
-    <div class="banner-company-name" id="banner-name">Yakksh Foodstuff</div>
-    <div class="banner-company-sub" id="banner-sub">Trading FZE LLC</div>
+    <div class="brand-name" id="brand-name">Yakksh Foodstuff</div>
+    <div class="brand-sub"  id="brand-sub">Trading FZE LLC</div>
   </div>
 </div>
 
 <!-- ================================================================
-  MAIN CONTAINER
+  PAGE
 ================================================================ -->
-<div class="main-container">
+<div class="page">
 
-  <!-- Profile Row -->
-  <div class="profile-wrap">
-    <div class="profile-row">
+  <!-- ── PROFILE STRIP ── -->
+  <div class="profile-strip">
+    <div class="profile-inner">
       <img id="profile-avatar" class="profile-avatar"
-        src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=200&q=80"
+        src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=300&q=80"
         alt="Profile">
-      <div class="profile-text">
+      <div class="profile-info">
         <div class="profile-name" id="owner-name">Savann Prajaapatii</div>
         <div class="profile-role" id="owner-role">Owner and Manager</div>
       </div>
     </div>
-    <div class="views-badge">
+    <div class="views-pill">
       <span class="views-dot"></span>
-      <span id="views-count">0</span>&nbsp;Views
+      <span id="views-count">351</span>&thinsp;Views
     </div>
   </div>
 
-  <!-- ============================================================
-    CARD: Business Details
-  ============================================================ -->
+  <!-- ================================================================
+    CARD  ①  Business Details
+  ================================================================ -->
   <div class="card">
-    <div class="card-header open" data-target="body-biz">
-      <div class="card-title">
-        <span class="hicon">💼</span>
+    <div class="ch" data-cb="cb-biz">
+      <div class="ch-left">
+        <span class="ch-icon">💼</span>
         Business Details
       </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <div class="ch-arrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="#27ae60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
     </div>
 
-    <div class="card-body" id="body-biz">
+    <div class="cb" id="cb-biz">
+
       <!-- Business Name -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/>
+            <line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Business Name</span>
-          <span class="d-value" id="biz-name">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Business Name</span>
+          <span class="brow-val" id="biz-name">—</span>
         </div>
       </div>
 
       <!-- Category -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Business Category</span>
-          <span class="d-value" id="biz-category">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Business Category</span>
+          <span class="brow-val" id="biz-cat">—</span>
         </div>
       </div>
 
       <!-- Address -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Address (Office)</span>
-          <span class="d-value" id="biz-address">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Address (Office)</span>
+          <span class="brow-val" id="biz-addr">—</span>
         </div>
       </div>
 
       <!-- Mobile India -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Mobile (India)</span>
-          <span class="d-value" id="biz-mobile-india">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Mobile (India)</span>
+          <span class="brow-val link" id="biz-mob-in">—</span>
         </div>
       </div>
 
       <!-- Mobile UAE -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Mobile (UAE)</span>
-          <span class="d-value" id="biz-mobile-uae">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Mobile (UAE)</span>
+          <span class="brow-val link" id="biz-mob-uae">—</span>
         </div>
       </div>
 
       <!-- Email -->
-      <div class="detail-row">
-        <div class="d-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div class="brow">
+        <div class="brow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
         </div>
-        <div class="d-content">
-          <span class="d-label">Email</span>
-          <span class="d-value" id="biz-email" style="color:#3db54a;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">—</span>
+        <div class="brow-body">
+          <span class="brow-label">Email</span>
+          <span class="brow-val link" id="biz-email">—</span>
         </div>
       </div>
 
-      <!-- WhatsApp Share -->
-      <div class="wa-section">
+      <!-- ── WhatsApp Share ── -->
+      <div class="wa-wrap">
         <span class="wa-label">Share On Whatsapp</span>
         <div class="wa-row">
-          <select class="wa-country" id="wa-country">
+          <select class="wa-code" id="wa-code">
             <option value="91">+91-</option>
             <option value="971">+971-</option>
             <option value="1">+1-</option>
@@ -154,141 +192,171 @@
             <option value="973">+973-</option>
             <option value="49">+49-</option>
             <option value="33">+33-</option>
-            <option value="86">+86-</option>
-            <option value="81">+81-</option>
-            <option value="61">+61-</option>
           </select>
-          <input type="tel" class="wa-input" id="wa-number"
-            placeholder="Enter Whatsapp number" inputmode="numeric">
-          <!-- WhatsApp icon -->
-          <button class="wa-send-btn" id="btn-wa-send" title="Send via WhatsApp">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff">
-              <path d="M16 2C8.28 2 2 8.28 2 16c0 2.48.67 4.8 1.83 6.8L2 30l7.4-1.8A13.93 13.93 0 0016 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.5a11.44 11.44 0 01-5.97-1.68l-.43-.27-4.39 1.07 1.1-4.28-.28-.44A11.5 11.5 0 1116 27.5zm6.3-8.6c-.34-.17-2.02-1-2.33-1.11-.32-.11-.55-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.25-.74.08-.34-.17-1.44-.53-2.75-1.7-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.7.16-.16.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.08-.17-.77-1.86-1.06-2.55-.28-.67-.57-.58-.77-.59H10.6c-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.22 3.32 1.4 3.55c.17.23 2.4 3.65 5.8 5.12.81.35 1.44.56 1.93.71.81.26 1.55.22 2.14.13.65-.1 2-.82 2.28-1.61.28-.8.28-1.48.2-1.62-.09-.14-.32-.23-.66-.4z"/>
+          <input type="tel" class="wa-num" id="wa-num"
+            placeholder="Enter Whatsapp number" inputmode="numeric" maxlength="15">
+          <!-- WhatsApp send -->
+          <button class="wa-btn wa-btn--green" id="btn-wa" title="Send on WhatsApp" aria-label="Send WhatsApp">
+            <svg width="21" height="21" viewBox="0 0 32 32" fill="#fff">
+              <path d="M16 2C8.27 2 2 8.27 2 16c0 2.5.68 4.83 1.84 6.83L2 30l7.38-1.82A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5a11.44 11.44 0 01-5.96-1.68l-.44-.27-4.38 1.07 1.1-4.28-.28-.45A11.5 11.5 0 1116 27.5zm6.3-8.6c-.34-.17-2.02-1-2.33-1.1-.3-.12-.54-.17-.77.16-.22.34-.88 1.1-1.08 1.33-.2.23-.39.26-.73.09-.34-.18-1.44-.53-2.75-1.7-1.01-.9-1.7-2.02-1.9-2.36-.2-.33-.02-.52.15-.7.16-.16.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.02-.6-.09-.17-.77-1.86-1.06-2.55-.28-.67-.57-.58-.77-.59H10.6c-.22 0-.6.09-.91.43-.3.34-1.19 1.17-1.19 2.86s1.22 3.32 1.4 3.55c.17.23 2.39 3.64 5.8 5.12.8.34 1.43.55 1.92.71.81.26 1.55.22 2.13.13.65-.1 2-.82 2.29-1.61.28-.8.28-1.48.19-1.63-.09-.14-.32-.22-.66-.4z"/>
             </svg>
           </button>
-          <!-- Share icon -->
-          <button class="wa-share-btn" id="btn-share" title="Share page">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Share -->
+          <button class="wa-btn wa-btn--dark" id="btn-share" title="Share page" aria-label="Share">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
             </svg>
           </button>
         </div>
-        <button class="install-btn" id="btn-install">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e9039" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12l4 4 4-4"/></svg>
+        <button class="wa-install" id="btn-install">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="8 12 12 16 16 12"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+          </svg>
           Install Your App
         </button>
       </div>
+
     </div>
   </div>
 
-  <!-- ============================================================
-    CARD: About Us
-  ============================================================ -->
+  <!-- ================================================================
+    CARD  ②  About Us
+  ================================================================ -->
   <div class="card">
-    <div class="card-header open" data-target="body-about">
-      <div class="card-title">
-        <span class="hicon">🍀</span>
+    <div class="ch" data-cb="cb-about">
+      <div class="ch-left">
+        <span class="ch-icon">🍀</span>
         About Us
       </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <div class="ch-arrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="#27ae60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
     </div>
-    <div class="card-body" id="body-about">
-      <p class="about-text" id="about-text">Loading…</p>
+    <div class="cb" id="cb-about">
+      <p class="about-body" id="about-text">Loading…</p>
     </div>
   </div>
 
-  <!-- ============================================================
-    CARD: What We Serve
-  ============================================================ -->
+  <!-- ================================================================
+    CARD  ③  What We Serve
+  ================================================================ -->
   <div class="card">
-    <div class="card-header open" data-target="body-serve">
-      <div class="card-title">
-        <span class="hicon">✏️</span>
+    <div class="ch" data-cb="cb-serve">
+      <div class="ch-left">
+        <span class="ch-icon">✏️</span>
         What We Serve
       </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <div class="ch-arrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="#27ae60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
     </div>
-    <div class="card-body" id="body-serve">
-      <ul class="num-list" id="services-list">
-        <li><span class="num-badge">01</span>Loading…</li>
-      </ul>
+    <div class="cb" id="cb-serve">
+      <ul class="svc-list" id="svc-list"></ul>
     </div>
   </div>
 
-  <!-- ============================================================
-    CARD: Our Products
-  ============================================================ -->
+  <!-- ================================================================
+    CARD  ④  Our Products
+  ================================================================ -->
   <div class="card">
-    <div class="card-header open" data-target="body-products">
-      <div class="card-title">
-        <span class="hicon">💎</span>
+    <div class="ch" data-cb="cb-products">
+      <div class="ch-left">
+        <span class="ch-icon">💎</span>
         Our Products
       </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <div class="ch-arrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="#27ae60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
     </div>
-    <div class="card-body" id="body-products">
+    <div class="cb" id="cb-products">
       <div id="products-list">
-        <div class="empty-state">
-          <div class="empty-icon">⏳</div>
-          <p>Loading products…</p>
-        </div>
+        <!-- populated by JS -->
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-    CARD: Follow Us
-  ============================================================ -->
+  <!-- ================================================================
+    CARD  ⑤  Follow Us
+  ================================================================ -->
   <div class="card">
-    <div class="card-header open" data-target="body-follow">
-      <div class="card-title">
-        <span class="hicon">📣</span>
+    <div class="ch" data-cb="cb-follow">
+      <div class="ch-left">
+        <span class="ch-icon">📣</span>
         Follow Us
       </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      <div class="ch-arrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="#27ae60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
     </div>
-    <div class="card-body" id="body-follow">
-      <div class="social-row">
-        <a id="link-fb" class="s-btn s-facebook" href="#" target="_blank" rel="noopener" title="Facebook">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    <div class="cb" id="cb-follow">
+      <div class="social-grid">
+        <a id="soc-fb" class="soc soc-fb" href="#" target="_blank" rel="noopener" title="Facebook">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
         </a>
-        <a id="link-ig" class="s-btn s-instagram" href="#" target="_blank" rel="noopener" title="Instagram">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3"/></svg>
+        <a id="soc-ig" class="soc soc-ig" href="#" target="_blank" rel="noopener" title="Instagram">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3"/>
+          </svg>
         </a>
-        <a id="link-li" class="s-btn s-linkedin" href="#" target="_blank" rel="noopener" title="LinkedIn">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <a id="soc-li" class="soc soc-li" href="#" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
         </a>
-        <a id="link-yt" class="s-btn s-youtube" href="#" target="_blank" rel="noopener" title="YouTube" style="display:none">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.5C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        <a id="soc-yt" class="soc soc-yt" href="#" target="_blank" rel="noopener" title="YouTube" style="display:none">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.5C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+          </svg>
         </a>
-        <a id="link-tw" class="s-btn s-twitter" href="#" target="_blank" rel="noopener" title="Twitter/X" style="display:none">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        <a id="soc-tw" class="soc soc-tw" href="#" target="_blank" rel="noopener" title="Twitter/X" style="display:none">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+          </svg>
         </a>
       </div>
     </div>
   </div>
 
-</div><!-- /main-container -->
+</div><!-- /page -->
 
-<!-- Buttons -->
-<button id="back-to-top" title="Back to top" aria-label="Back to top">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+<!-- Fixed buttons -->
+<button id="back-top" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+    stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
 </button>
 
-<a id="admin-fab" href="admin.html" title="Admin Panel" aria-label="Admin">⚙️</a>
+<a id="admin-fab" href="admin.html" title="Admin Panel" aria-label="Admin Panel">⚙️</a>
 
 <div class="toast" id="toast"></div>
 
+<!-- Scripts -->
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 </body>

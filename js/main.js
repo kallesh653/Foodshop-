@@ -1,234 +1,250 @@
-/* ============================================================
-   FOODSHOP - Main Page Script
-   ============================================================ */
+/* ================================================================
+   FOODSHOP — Main page script
+   ================================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const data = FoodshopDB.get();
-  const biz  = data.business;
+document.addEventListener('DOMContentLoaded', init);
 
-  // Increment page views
+function init() {
+  const db  = FoodshopDB.get();
+  const biz = db.business;
+
+  /* page views */
   FoodshopDB.incrementViews();
   const views = FoodshopDB.getBusiness().pageViews;
 
-  // ---- Banner ----
-  setAttr('banner-bg-img', 'src', biz.bannerImage);
-  setAttr('banner-logo',   'src', biz.logoImage);
+  /* ── banner ── */
+  setImg('banner-bg',   biz.bannerImage);
+  setImg('brand-logo',  biz.logoImage);
+  setImg('profile-avatar', biz.logoImage);
 
-  // Company name split for banner (Name + sub)
-  const nameParts = biz.name.split(' ');
-  const subIndex  = nameParts.findIndex(w => w === 'Trading' || w === 'FZE' || w === 'LLC' || w === 'Pvt' || w === 'Ltd');
-  if (subIndex > 0) {
-    setText('banner-name', nameParts.slice(0, subIndex).join(' '));
-    setText('banner-sub',  nameParts.slice(subIndex).join(' '));
+  /* split company name for banner */
+  const words    = biz.name.trim().split(' ');
+  const splitAt  = words.findIndex(w => /^(Trading|FZE|LLC|Pvt|Ltd|Inc|Co\.)$/i.test(w));
+  if (splitAt > 0) {
+    setTxt('brand-name', words.slice(0, splitAt).join(' '));
+    setTxt('brand-sub',  words.slice(splitAt).join(' '));
   } else {
-    setText('banner-name', biz.name);
-    setText('banner-sub',  '');
+    setTxt('brand-name', biz.name);
+    setTxt('brand-sub',  '');
   }
 
-  // ---- Profile ----
-  setAttr('profile-avatar', 'src', biz.logoImage);
-  setText('owner-name',  biz.ownerName);
-  setText('owner-role',  biz.ownerRole);
-  setText('views-count', views);
+  /* ── profile ── */
+  setTxt('owner-name',   biz.ownerName);
+  setTxt('owner-role',   biz.ownerRole);
+  setTxt('views-count',  views);
 
-  // ---- Business Details ----
-  setText('biz-name',        biz.name);
-  setText('biz-category',    biz.category);
-  setText('biz-address',     biz.address);
-  setText('biz-mobile-india',biz.mobileIndia);
-  setText('biz-mobile-uae',  biz.mobileUAE);
-  setText('biz-email',       biz.email);
-
-  document.getElementById('biz-email').onclick = () => {
-    window.location.href = 'mailto:' + biz.email;
-  };
-
-  // ---- About ----
-  document.getElementById('about-text').innerHTML = biz.aboutUs;
-
-  // ---- Page title ----
+  /* ── page meta ── */
   document.title = biz.name;
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.content = biz.name + ' — ' + biz.category;
 
-  // ---- Country select default ----
-  const countrySel = document.getElementById('wa-country');
-  if (biz.defaultCountry) {
-    const code = biz.defaultCountry.replace('+','').replace('-','');
-    const opt  = countrySel.querySelector(`option[value="${code}"]`);
+  /* ── business details ── */
+  setTxt('biz-name',    biz.name);
+  setTxt('biz-cat',     biz.category);
+  setTxt('biz-addr',    biz.address);
+  setTxt('biz-mob-in',  biz.mobileIndia);
+  setTxt('biz-mob-uae', biz.mobileUAE);
+  setTxt('biz-email',   biz.email);
+
+  /* clickable links */
+  el('biz-mob-in') ?.addEventListener('click', () => window.location.href = 'tel:' + biz.mobileIndia.replace(/\s/g,''));
+  el('biz-mob-uae')?.addEventListener('click', () => window.location.href = 'tel:' + biz.mobileUAE.replace(/\s/g,''));
+  el('biz-email')  ?.addEventListener('click', () => window.location.href = 'mailto:' + biz.email);
+
+  /* ── about ── */
+  const aboutEl = el('about-text');
+  if (aboutEl) aboutEl.innerHTML = biz.aboutUs || '';
+
+  /* ── default country code ── */
+  const codeSel = el('wa-code');
+  if (codeSel && biz.defaultCountry) {
+    const opt = codeSel.querySelector(`option[value="${biz.defaultCountry}"]`);
     if (opt) opt.selected = true;
   }
 
-  // ---- WhatsApp send ----
-  document.getElementById('btn-wa-send').addEventListener('click', () => {
-    const code = countrySel.value;
-    const num  = document.getElementById('wa-number').value.trim().replace(/\D/g,'');
-    if (!num) { showToast('Please enter a WhatsApp number'); return; }
-    const msg = encodeURIComponent(
-      `Hello! I found *${biz.name}* and would like to connect.`
-    );
+  /* ── WhatsApp send ── */
+  el('btn-wa')?.addEventListener('click', () => {
+    const code = codeSel ? codeSel.value : '91';
+    const num  = (el('wa-num')?.value || '').trim().replace(/\D/g, '');
+    if (!num) { toast('Please enter a WhatsApp number'); return; }
+    const msg  = encodeURIComponent(`Hello! I found *${biz.name}* and would like to connect.`);
     window.open(`https://wa.me/${code}${num}?text=${msg}`, '_blank');
   });
 
-  // ---- Share ----
-  document.getElementById('btn-share').addEventListener('click', async () => {
+  /* ── page share ── */
+  el('btn-share')?.addEventListener('click', async () => {
     if (navigator.share) {
       try { await navigator.share({ title: biz.name, url: location.href }); return; }
-      catch(e) {}
+      catch {}
     }
     try {
       await navigator.clipboard.writeText(location.href);
-      showToast('Link copied!');
-    } catch(e) {
-      showToast('Copy the URL from your address bar');
+      toast('Link copied to clipboard!');
+    } catch {
+      toast('Copy the URL from your address bar');
     }
   });
 
-  // ---- Install button ----
-  if (!biz.showInstallBtn) {
-    const ib = document.getElementById('btn-install');
-    if (ib) ib.style.display = 'none';
+  /* ── install button ── */
+  const installBtn = el('btn-install');
+  if (installBtn) {
+    if (biz.showInstallBtn === false) {
+      installBtn.style.display = 'none';
+    } else {
+      // PWA install prompt if available
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') toast('App installed!');
+          deferredPrompt = null;
+        } else {
+          toast('To install: tap browser menu → Add to Home Screen');
+        }
+      });
+    }
   }
 
-  // ---- Services ----
-  renderServices(data.services);
+  /* ── services ── */
+  renderServices(db.services);
 
-  // ---- Products ----
+  /* ── products ── */
   renderProducts(FoodshopDB.getProducts(), biz);
 
-  // ---- Social links ----
-  setSocial('link-fb', biz.facebook);
-  setSocial('link-ig', biz.instagram);
-  setSocial('link-li', biz.linkedin);
-  setSocial('link-yt', biz.youtube);
-  setSocial('link-tw', biz.twitter);
+  /* ── social ── */
+  linkSoc('soc-fb', biz.facebook);
+  linkSoc('soc-ig', biz.instagram);
+  linkSoc('soc-li', biz.linkedin);
+  linkSoc('soc-yt', biz.youtube);
+  linkSoc('soc-tw', biz.twitter);
 
-  // ---- Card toggles ----
-  document.querySelectorAll('.card-header').forEach(hdr => {
+  /* ── card toggle ── */
+  document.querySelectorAll('.ch').forEach(hdr => {
     hdr.addEventListener('click', () => {
-      const targetId = hdr.dataset.target;
-      const body     = document.getElementById(targetId);
-      const chevron  = hdr.querySelector('.chevron');
-      if (!body) return;
-      const isHidden = body.classList.toggle('hidden');
-      if (chevron) chevron.classList.toggle('collapsed', isHidden);
-      hdr.classList.toggle('open', !isHidden);
+      const cbId   = hdr.dataset.cb;
+      const cb     = document.getElementById(cbId);
+      const arrow  = hdr.querySelector('.ch-arrow');
+      if (!cb) return;
+      const closed = cb.classList.toggle('closed');
+      if (arrow) arrow.classList.toggle('down', closed);
     });
   });
 
-  // ---- Back to top ----
-  const btt = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    btt.classList.toggle('show', window.scrollY > 300);
-  }, { passive: true });
-  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-});
+  /* ── back to top ── */
+  const btt = el('back-top');
+  window.addEventListener('scroll', () => btt?.classList.toggle('vis', scrollY > 300), { passive:true });
+  btt?.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+}
 
-/* ---- Render services list ---- */
-function renderServices(services) {
-  const ul = document.getElementById('services-list');
+/* ================================================================
+   RENDER  — Services
+   ================================================================ */
+function renderServices(list) {
+  const ul = el('svc-list');
   if (!ul) return;
-  if (!services || !services.length) {
-    ul.innerHTML = '<li style="color:#aaa;font-size:13px;padding:12px 0;">No services listed yet.</li>';
+  if (!list?.length) {
+    ul.innerHTML = '<li style="color:#aaa;padding:12px 0;">No services listed.</li>';
     return;
   }
-  ul.innerHTML = services.map((s, i) =>
-    `<li><span class="num-badge">${pad(i+1)}</span>${esc(s)}</li>`
+  ul.innerHTML = list.map((s, i) =>
+    `<li><span class="n-badge">${pad(i+1)}</span>${esc(s)}</li>`
   ).join('');
 }
 
-/* ---- Render products ---- */
+/* ================================================================
+   RENDER  — Products
+   ================================================================ */
 function renderProducts(products, biz) {
-  const container = document.getElementById('products-list');
-  if (!container) return;
+  const wrap = el('products-list');
+  if (!wrap) return;
 
-  if (!products || !products.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">🛒</div>
-        <p>No products yet. Check back soon!</p>
+  if (!products?.length) {
+    wrap.innerHTML = `
+      <div style="text-align:center;padding:40px 20px;color:#aaa;">
+        <div style="font-size:54px;margin-bottom:12px;">🛒</div>
+        <p style="font-weight:600;">No products yet. Check back soon!</p>
       </div>`;
     return;
   }
 
-  container.innerHTML = products.map((p, i) => `
-    <div class="product-entry">
-      <div class="product-num-row">
-        <span class="num-badge">${pad(i+1)}</span>
-        <span class="product-name">${esc(p.name)}</span>
-      </div>
-      <div class="product-img-box">
-        ${p.image
-          ? `<img class="main-img" src="${eAttr(p.image)}" alt="${eAttr(p.name)}" loading="lazy"
-               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:72px;\'>🥦</div>'">`
-          : '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:72px;">🥦</div>'
-        }
-        ${biz.logoImage
-          ? `<img class="product-watermark" src="${eAttr(biz.logoImage)}" alt="logo" onerror="this.style.display='none'">`
-          : ''
-        }
-      </div>
-      ${p.description
-        ? `<p class="product-desc">${esc(p.description)}</p>`
-        : ''
-      }
-      <a class="inquiry-btn" href="${waLink(biz.whatsapp, p.name, biz.name)}" target="_blank" rel="noopener">
-        Inquiry
-      </a>
-    </div>
-  `).join('');
+  wrap.innerHTML = products.map((p, i) => {
+    const waHref = makeWaLink(biz.whatsapp, p.name, biz.name);
+    const tag    = i < 3 ? '<div class="prod-tag">Popular</div>' : '';
+    const imgHtml = p.image
+      ? `<img class="p-img" src="${ea(p.image)}" alt="${ea(p.name)}" loading="lazy"
+           onerror="this.style.display='none'">`
+      : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:80px;opacity:.5;">🥦</div>`;
+    const wmHtml = biz.logoImage
+      ? `<img class="prod-wm" src="${ea(biz.logoImage)}" alt="logo" onerror="this.style.display='none'">`
+      : '';
+    const descHtml = p.description
+      ? `<p class="prod-desc">${esc(p.description)}</p>`
+      : '';
+
+    return `
+      <div class="prod-item">
+        <div class="prod-title-row">
+          <span class="n-badge">${pad(i+1)}</span>
+          <span class="prod-name">${esc(p.name)}</span>
+        </div>
+        <div class="prod-img-card">
+          ${imgHtml}
+          ${wmHtml}
+          ${tag}
+        </div>
+        ${descHtml}
+        <div class="prod-footer">
+          <a class="btn-inquiry" href="${waHref}" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor">
+              <path d="M16 2C8.27 2 2 8.27 2 16c0 2.5.68 4.83 1.84 6.83L2 30l7.38-1.82A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.4c-.34-.17-2.02-1-2.33-1.11-.3-.11-.54-.17-.77.17-.22.34-.88 1.1-1.08 1.33-.2.23-.39.26-.73.09-.34-.18-1.44-.53-2.75-1.7-1.01-.9-1.7-2.02-1.9-2.36-.2-.33-.02-.52.15-.7.16-.16.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.02-.6-.09-.17-.77-1.86-1.06-2.55-.28-.67-.57-.58-.77-.59H10.6c-.22 0-.6.09-.91.43-.3.34-1.19 1.17-1.19 2.86s1.22 3.32 1.4 3.55c.17.23 2.39 3.64 5.8 5.12.8.34 1.43.55 1.92.71.81.26 1.55.22 2.13.13.65-.1 2-.82 2.29-1.61.28-.8.28-1.48.19-1.63-.09-.14-.32-.22-.66-.4z"/>
+            </svg>
+            Inquiry
+          </a>
+        </div>
+      </div>`;
+  }).join('');
 }
 
-/* ---- Build WhatsApp inquiry link ---- */
-function waLink(waNumber, productName, bizName) {
-  const num = (waNumber || '').replace(/\D/g, '');
-  if (!num) return '#';
+/* ================================================================
+   HELPERS
+   ================================================================ */
+function makeWaLink(waNum, productName, bizName) {
+  const n = (waNum || '').replace(/\D/g, '');
+  if (!n) return '#';
   const msg = encodeURIComponent(
-    `Hello *${bizName}*!\n\nI'm interested in: *${productName}*\n\nPlease share details, pricing and availability. Thank you!`
+    `Hello *${bizName}*! 👋\n\nI am interested in your product:\n*${productName}*\n\nCould you please share details, pricing and availability?\n\nThank you!`
   );
-  return `https://wa.me/${num}?text=${msg}`;
+  return `https://wa.me/${n}?text=${msg}`;
 }
 
-/* ---- Social link helper ---- */
-function setSocial(id, url) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (url && url.trim() && url !== '#') {
-    el.href = url.trim();
-    el.style.display = 'flex';
+function linkSoc(id, url) {
+  const a = el(id);
+  if (!a) return;
+  if (url?.trim() && url !== '#') {
+    a.href = url.trim();
+    a.style.display = 'flex';
   } else {
-    el.style.display = 'none';
+    a.style.display = 'none';
   }
 }
 
-/* ---- DOM helpers ---- */
-function setText(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val || '';
-}
+function el(id)      { return document.getElementById(id); }
+function setTxt(id,v){ const e=el(id); if(e) e.textContent=v||''; }
+function setImg(id,v){ const e=el(id); if(e&&v) e.src=v; }
+function pad(n)      { return String(n).padStart(2,'0'); }
+function esc(s)      { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function ea(s)       { return String(s||'').replace(/"/g,'&quot;'); }
 
-function setAttr(id, attr, val) {
-  const el = document.getElementById(id);
-  if (el && val) el[attr] = val;
-}
-
-function pad(n) {
-  return String(n).padStart(2, '0');
-}
-
-function esc(s) {
-  return String(s || '')
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function eAttr(s) {
-  return String(s || '').replace(/"/g,'&quot;');
-}
-
-/* ---- Toast ---- */
-function showToast(msg, duration = 2800) {
-  const t = document.getElementById('toast') || document.querySelector('.toast');
+function toast(msg, ms=3000) {
+  const t = el('toast');
   if (!t) return;
   t.textContent = msg;
-  t.classList.add('show');
+  t.classList.add('on');
   clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove('show'), duration);
+  t._t = setTimeout(() => t.classList.remove('on'), ms);
 }
