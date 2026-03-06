@@ -2,241 +2,277 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Foodshop - Fresh Fruits, Vegetables & Food Products">
+  <meta name="theme-color" content="#3db54a">
   <title>Foodshop</title>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Favicon (emoji) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+  </style>
 </head>
 <body>
 
-<!-- ============================================================
-     BANNER
-     ============================================================ -->
+<!-- ================================================================
+  BANNER
+================================================================ -->
 <div class="banner">
-  <img id="banner-img"
-    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80"
-    alt="Banner"
-    class="banner-img">
+  <img id="banner-bg-img" class="banner-bg"
+    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=80"
+    alt="Banner background">
   <div class="banner-overlay"></div>
-  <div class="banner-logo">
-    <img id="banner-logo-img"
-      src="https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=200&q=80"
-      alt="Logo">
-    <h2 id="banner-name">Foodshop</h2>
-    <span id="banner-tagline">General Trading</span>
+
+  <div class="banner-center">
+    <div class="banner-logo-circle">
+      <img id="banner-logo" src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=200&q=80" alt="Logo">
+    </div>
+    <div class="banner-company-name" id="banner-name">Yakksh Foodstuff</div>
+    <div class="banner-company-sub" id="banner-sub">Trading FZE LLC</div>
   </div>
 </div>
 
-<!-- ============================================================
-     MAIN CONTAINER
-     ============================================================ -->
+<!-- ================================================================
+  MAIN CONTAINER
+================================================================ -->
 <div class="main-container">
 
-  <!-- Profile Section -->
-  <div style="position:relative;">
-    <div class="profile-section">
-      <img id="profile-avatar"
-        src="https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=200&q=80"
-        alt="Profile"
-        class="profile-avatar">
-      <div class="profile-info">
-        <h1 id="owner-name">Owner Name</h1>
-        <p id="owner-role">Owner and Manager</p>
+  <!-- Profile Row -->
+  <div class="profile-wrap">
+    <div class="profile-row">
+      <img id="profile-avatar" class="profile-avatar"
+        src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=200&q=80"
+        alt="Profile">
+      <div class="profile-text">
+        <div class="profile-name" id="owner-name">Savann Prajaapatii</div>
+        <div class="profile-role" id="owner-role">Owner and Manager</div>
       </div>
     </div>
     <div class="views-badge">
-      <span class="dot"></span>
-      <span id="views-count">0</span> Views
+      <span class="views-dot"></span>
+      <span id="views-count">0</span>&nbsp;Views
     </div>
   </div>
 
-  <!-- ---- BUSINESS DETAILS CARD ---- -->
+  <!-- ============================================================
+    CARD: Business Details
+  ============================================================ -->
   <div class="card">
-    <div class="card-header">
-      <h3>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <div class="card-header open" data-target="body-biz">
+      <div class="card-title">
+        <span class="hicon">💼</span>
         Business Details
-      </h3>
-      <span class="toggle-icon open">&#8679;</span>
+      </div>
+      <div class="chevron">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
     </div>
-    <div class="card-body">
 
+    <div class="card-body" id="body-biz">
+      <!-- Business Name -->
       <div class="detail-row">
-        <div class="detail-icon">🏢</div>
-        <div class="detail-content">
-          <label>Business Name</label>
-          <span id="biz-name">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Business Name</span>
+          <span class="d-value" id="biz-name">—</span>
         </div>
       </div>
 
+      <!-- Category -->
       <div class="detail-row">
-        <div class="detail-icon">🏭</div>
-        <div class="detail-content">
-          <label>Business Category</label>
-          <span id="biz-category">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Business Category</span>
+          <span class="d-value" id="biz-category">—</span>
         </div>
       </div>
 
+      <!-- Address -->
       <div class="detail-row">
-        <div class="detail-icon">🏠</div>
-        <div class="detail-content">
-          <label>Address (Office)</label>
-          <span id="biz-address">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Address (Office)</span>
+          <span class="d-value" id="biz-address">—</span>
         </div>
       </div>
 
+      <!-- Mobile India -->
       <div class="detail-row">
-        <div class="detail-icon">📱</div>
-        <div class="detail-content">
-          <label>Mobile (India)</label>
-          <span id="biz-mobile-india">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Mobile (India)</span>
+          <span class="d-value" id="biz-mobile-india">—</span>
         </div>
       </div>
 
+      <!-- Mobile UAE -->
       <div class="detail-row">
-        <div class="detail-icon">📱</div>
-        <div class="detail-content">
-          <label>Mobile (UAE)</label>
-          <span id="biz-mobile-uae">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Mobile (UAE)</span>
+          <span class="d-value" id="biz-mobile-uae">—</span>
         </div>
       </div>
 
+      <!-- Email -->
       <div class="detail-row">
-        <div class="detail-icon">✉️</div>
-        <div class="detail-content">
-          <label>Email</label>
-          <span id="biz-email" style="color:#3db54a;text-decoration:underline;">—</span>
+        <div class="d-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="d-content">
+          <span class="d-label">Email</span>
+          <span class="d-value" id="biz-email" style="color:#3db54a;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">—</span>
         </div>
       </div>
 
       <!-- WhatsApp Share -->
-      <div class="whatsapp-share">
-        <label>Share On Whatsapp</label>
-        <div class="whatsapp-input-row">
-          <select class="country-select" id="country-select">
-            <option value="+91">+91 🇮🇳</option>
-            <option value="+971">+971 🇦🇪</option>
-            <option value="+1">+1 🇺🇸</option>
-            <option value="+44">+44 🇬🇧</option>
-            <option value="+60">+60 🇲🇾</option>
-            <option value="+65">+65 🇸🇬</option>
-            <option value="+966">+966 🇸🇦</option>
-            <option value="+974">+974 🇶🇦</option>
-            <option value="+968">+968 🇴🇲</option>
-            <option value="+973">+973 🇧🇭</option>
-            <option value="+49">+49 🇩🇪</option>
-            <option value="+33">+33 🇫🇷</option>
-            <option value="+86">+86 🇨🇳</option>
-            <option value="+81">+81 🇯🇵</option>
-            <option value="+61">+61 🇦🇺</option>
+      <div class="wa-section">
+        <span class="wa-label">Share On Whatsapp</span>
+        <div class="wa-row">
+          <select class="wa-country" id="wa-country">
+            <option value="91">+91-</option>
+            <option value="971">+971-</option>
+            <option value="1">+1-</option>
+            <option value="44">+44-</option>
+            <option value="60">+60-</option>
+            <option value="65">+65-</option>
+            <option value="966">+966-</option>
+            <option value="974">+974-</option>
+            <option value="968">+968-</option>
+            <option value="973">+973-</option>
+            <option value="49">+49-</option>
+            <option value="33">+33-</option>
+            <option value="86">+86-</option>
+            <option value="81">+81-</option>
+            <option value="61">+61-</option>
           </select>
-          <input type="tel" class="wa-number-input" id="wa-number-input"
-            placeholder="Enter Whatsapp number">
-          <button class="btn-whatsapp" id="btn-wa-send" title="Send on WhatsApp">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.55 4.1 1.517 5.829L.057 23.25l5.565-1.459A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.659-.495-5.191-1.362L3 21.75l1.126-4.714A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          <input type="tel" class="wa-input" id="wa-number"
+            placeholder="Enter Whatsapp number" inputmode="numeric">
+          <!-- WhatsApp icon -->
+          <button class="wa-send-btn" id="btn-wa-send" title="Send via WhatsApp">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="#fff">
+              <path d="M16 2C8.28 2 2 8.28 2 16c0 2.48.67 4.8 1.83 6.8L2 30l7.4-1.8A13.93 13.93 0 0016 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.5a11.44 11.44 0 01-5.97-1.68l-.43-.27-4.39 1.07 1.1-4.28-.28-.44A11.5 11.5 0 1116 27.5zm6.3-8.6c-.34-.17-2.02-1-2.33-1.11-.32-.11-.55-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.25-.74.08-.34-.17-1.44-.53-2.75-1.7-1.01-.9-1.7-2.02-1.9-2.36-.2-.34-.02-.52.15-.7.16-.16.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.08-.17-.77-1.86-1.06-2.55-.28-.67-.57-.58-.77-.59H10.6c-.23 0-.6.09-.91.43-.32.34-1.2 1.17-1.2 2.86s1.22 3.32 1.4 3.55c.17.23 2.4 3.65 5.8 5.12.81.35 1.44.56 1.93.71.81.26 1.55.22 2.14.13.65-.1 2-.82 2.28-1.61.28-.8.28-1.48.2-1.62-.09-.14-.32-.23-.66-.4z"/>
             </svg>
           </button>
-          <button class="btn-share" id="btn-share" title="Share this page">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+          <!-- Share icon -->
+          <button class="wa-share-btn" id="btn-share" title="Share page">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="#fff" stroke-width="2"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="#fff" stroke-width="2"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
             </svg>
           </button>
         </div>
-        <button class="btn-install" id="btn-install">
-          📲 Install Your App
+        <button class="install-btn" id="btn-install">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e9039" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12l4 4 4-4"/></svg>
+          Install Your App
         </button>
       </div>
-
     </div>
   </div>
 
-  <!-- ---- ABOUT US CARD ---- -->
+  <!-- ============================================================
+    CARD: About Us
+  ============================================================ -->
   <div class="card">
-    <div class="card-header">
-      <h3>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <div class="card-header open" data-target="body-about">
+      <div class="card-title">
+        <span class="hicon">🍀</span>
         About Us
-      </h3>
-      <span class="toggle-icon open">&#8679;</span>
+      </div>
+      <div class="chevron">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
     </div>
-    <div class="card-body">
-      <p class="about-text" id="about-text">Loading...</p>
+    <div class="card-body" id="body-about">
+      <p class="about-text" id="about-text">Loading…</p>
     </div>
   </div>
 
-  <!-- ---- WHAT WE SERVE CARD ---- -->
+  <!-- ============================================================
+    CARD: What We Serve
+  ============================================================ -->
   <div class="card">
-    <div class="card-header">
-      <h3>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <div class="card-header open" data-target="body-serve">
+      <div class="card-title">
+        <span class="hicon">✏️</span>
         What We Serve
-      </h3>
-      <span class="toggle-icon open">&#8679;</span>
+      </div>
+      <div class="chevron">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
     </div>
-    <div class="card-body">
-      <ul class="numbered-list" id="services-list">
-        <li><span class="num-badge">01</span>Loading...</li>
+    <div class="card-body" id="body-serve">
+      <ul class="num-list" id="services-list">
+        <li><span class="num-badge">01</span>Loading…</li>
       </ul>
     </div>
   </div>
 
-  <!-- ---- OUR PRODUCTS CARD ---- -->
+  <!-- ============================================================
+    CARD: Our Products
+  ============================================================ -->
   <div class="card">
-    <div class="card-header">
-      <h3>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    <div class="card-header open" data-target="body-products">
+      <div class="card-title">
+        <span class="hicon">💎</span>
         Our Products
-      </h3>
-      <span class="toggle-icon open">&#8679;</span>
+      </div>
+      <div class="chevron">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
     </div>
-    <div class="card-body">
-      <div id="products-list" class="products-list">
+    <div class="card-body" id="body-products">
+      <div id="products-list">
         <div class="empty-state">
           <div class="empty-icon">⏳</div>
-          <p>Loading products...</p>
+          <p>Loading products…</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ---- FOLLOW US CARD ---- -->
+  <!-- ============================================================
+    CARD: Follow Us
+  ============================================================ -->
   <div class="card">
-    <div class="card-header">
-      <h3>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <div class="card-header open" data-target="body-follow">
+      <div class="card-title">
+        <span class="hicon">📣</span>
         Follow Us
-      </h3>
-      <span class="toggle-icon open">&#8679;</span>
+      </div>
+      <div class="chevron">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3db54a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+      </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" id="body-follow">
       <div class="social-row">
-        <a id="link-fb" class="social-btn facebook" href="#" target="_blank" rel="noopener" title="Facebook">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        <a id="link-fb" class="s-btn s-facebook" href="#" target="_blank" rel="noopener" title="Facebook">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         </a>
-        <a id="link-ig" class="social-btn instagram" href="#" target="_blank" rel="noopener" title="Instagram">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a id="link-ig" class="s-btn s-instagram" href="#" target="_blank" rel="noopener" title="Instagram">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="3"/></svg>
         </a>
-        <a id="link-li" class="social-btn linkedin" href="#" target="_blank" rel="noopener" title="LinkedIn">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <a id="link-li" class="s-btn s-linkedin" href="#" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a id="link-yt" class="social-btn youtube" href="#" target="_blank" rel="noopener" title="YouTube" style="display:none">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.5C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff0000"/></svg>
+        <a id="link-yt" class="s-btn s-youtube" href="#" target="_blank" rel="noopener" title="YouTube" style="display:none">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 00-1.95 1.95A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.5C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
         </a>
-        <a id="link-tw" class="social-btn twitter" href="#" target="_blank" rel="noopener" title="Twitter/X" style="display:none">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        <a id="link-tw" class="s-btn s-twitter" href="#" target="_blank" rel="noopener" title="Twitter/X" style="display:none">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
         </a>
       </div>
     </div>
@@ -244,18 +280,16 @@
 
 </div><!-- /main-container -->
 
-<!-- Back to Top -->
-<button id="back-to-top" title="Back to top">&#8679;</button>
+<!-- Buttons -->
+<button id="back-to-top" title="Back to top" aria-label="Back to top">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
-<!-- Admin FAB -->
-<a id="admin-fab" href="admin.html" title="Admin Panel">⚙️</a>
+<a id="admin-fab" href="admin.html" title="Admin Panel" aria-label="Admin">⚙️</a>
 
-<!-- Toast -->
-<div class="toast"></div>
+<div class="toast" id="toast"></div>
 
-<!-- Scripts -->
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>

@@ -6,211 +6,229 @@ document.addEventListener('DOMContentLoaded', () => {
   const data = FoodshopDB.get();
   const biz  = data.business;
 
-  // -- Increment views --
+  // Increment page views
   FoodshopDB.incrementViews();
   const views = FoodshopDB.getBusiness().pageViews;
 
-  // ---- Populate Business Info ----
-  set('banner-img', biz.bannerImage, 'src');
-  set('banner-logo-img', biz.logoImage, 'src');
-  set('banner-name', biz.name);
-  set('banner-tagline', biz.category.split(',')[0].trim() + ' & more');
-  set('profile-avatar', biz.logoImage, 'src');
-  set('owner-name', biz.ownerName);
-  set('owner-role', biz.ownerRole);
-  set('views-count', views);
-  set('biz-name', biz.name);
-  set('biz-category', biz.category);
-  set('biz-address', biz.address);
-  set('biz-mobile-india', biz.mobileIndia);
-  set('biz-mobile-uae', biz.mobileUAE);
-  set('biz-email', biz.email);
+  // ---- Banner ----
+  setAttr('banner-bg-img', 'src', biz.bannerImage);
+  setAttr('banner-logo',   'src', biz.logoImage);
+
+  // Company name split for banner (Name + sub)
+  const nameParts = biz.name.split(' ');
+  const subIndex  = nameParts.findIndex(w => w === 'Trading' || w === 'FZE' || w === 'LLC' || w === 'Pvt' || w === 'Ltd');
+  if (subIndex > 0) {
+    setText('banner-name', nameParts.slice(0, subIndex).join(' '));
+    setText('banner-sub',  nameParts.slice(subIndex).join(' '));
+  } else {
+    setText('banner-name', biz.name);
+    setText('banner-sub',  '');
+  }
+
+  // ---- Profile ----
+  setAttr('profile-avatar', 'src', biz.logoImage);
+  setText('owner-name',  biz.ownerName);
+  setText('owner-role',  biz.ownerRole);
+  setText('views-count', views);
+
+  // ---- Business Details ----
+  setText('biz-name',        biz.name);
+  setText('biz-category',    biz.category);
+  setText('biz-address',     biz.address);
+  setText('biz-mobile-india',biz.mobileIndia);
+  setText('biz-mobile-uae',  biz.mobileUAE);
+  setText('biz-email',       biz.email);
+
+  document.getElementById('biz-email').onclick = () => {
+    window.location.href = 'mailto:' + biz.email;
+  };
+
+  // ---- About ----
   document.getElementById('about-text').innerHTML = biz.aboutUs;
 
-  // -- page title --
+  // ---- Page title ----
   document.title = biz.name;
-  document.querySelector('meta[name="description"]').content =
-    biz.name + ' - ' + biz.category;
 
-  // ---- Default Country Code ----
-  const countrySelect = document.getElementById('country-select');
-  if (countrySelect && biz.defaultCountry) {
-    const opt = countrySelect.querySelector(`option[value="${biz.defaultCountry}"]`);
+  // ---- Country select default ----
+  const countrySel = document.getElementById('wa-country');
+  if (biz.defaultCountry) {
+    const code = biz.defaultCountry.replace('+','').replace('-','');
+    const opt  = countrySel.querySelector(`option[value="${code}"]`);
     if (opt) opt.selected = true;
   }
 
-  // ---- WhatsApp Send ----
+  // ---- WhatsApp send ----
   document.getElementById('btn-wa-send').addEventListener('click', () => {
-    const code = countrySelect.value;
-    const num  = document.getElementById('wa-number-input').value.trim().replace(/\D/g, '');
+    const code = countrySel.value;
+    const num  = document.getElementById('wa-number').value.trim().replace(/\D/g,'');
     if (!num) { showToast('Please enter a WhatsApp number'); return; }
-    const full = code.replace('+','') + num;
-    const msg  = encodeURIComponent(
-      `Hello! I found your business *${biz.name}* and would like to know more.`
+    const msg = encodeURIComponent(
+      `Hello! I found *${biz.name}* and would like to connect.`
     );
-    window.open(`https://wa.me/${full}?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${code}${num}?text=${msg}`, '_blank');
   });
 
   // ---- Share ----
   document.getElementById('btn-share').addEventListener('click', async () => {
+    if (navigator.share) {
+      try { await navigator.share({ title: biz.name, url: location.href }); return; }
+      catch(e) {}
+    }
     try {
-      if (navigator.share) {
-        await navigator.share({ title: biz.name, url: location.href });
-      } else {
-        await navigator.clipboard.writeText(location.href);
-        showToast('Link copied to clipboard!');
-      }
-    } catch (e) {
-      showToast('Could not share. Try copying the URL manually.');
+      await navigator.clipboard.writeText(location.href);
+      showToast('Link copied!');
+    } catch(e) {
+      showToast('Copy the URL from your address bar');
     }
   });
 
-  // ---- Install Button ----
-  const installBtn = document.getElementById('btn-install');
-  if (!biz.showInstallBtn) installBtn.style.display = 'none';
+  // ---- Install button ----
+  if (!biz.showInstallBtn) {
+    const ib = document.getElementById('btn-install');
+    if (ib) ib.style.display = 'none';
+  }
 
   // ---- Services ----
   renderServices(data.services);
 
   // ---- Products ----
-  renderProducts(FoodshopDB.getProducts(), biz.whatsapp, biz.name, biz.logoImage);
+  renderProducts(FoodshopDB.getProducts(), biz);
 
-  // ---- Social Links ----
-  setSocial('link-fb',  biz.facebook);
-  setSocial('link-ig',  biz.instagram);
-  setSocial('link-li',  biz.linkedin);
-  setSocial('link-yt',  biz.youtube);
-  setSocial('link-tw',  biz.twitter);
+  // ---- Social links ----
+  setSocial('link-fb', biz.facebook);
+  setSocial('link-ig', biz.instagram);
+  setSocial('link-li', biz.linkedin);
+  setSocial('link-yt', biz.youtube);
+  setSocial('link-tw', biz.twitter);
 
-  // ---- Card Toggle ----
-  document.querySelectorAll('.card-header').forEach(header => {
-    header.addEventListener('click', () => {
-      const body = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      body.classList.toggle('collapsed');
-      if (icon) icon.classList.toggle('open');
+  // ---- Card toggles ----
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    hdr.addEventListener('click', () => {
+      const targetId = hdr.dataset.target;
+      const body     = document.getElementById(targetId);
+      const chevron  = hdr.querySelector('.chevron');
+      if (!body) return;
+      const isHidden = body.classList.toggle('hidden');
+      if (chevron) chevron.classList.toggle('collapsed', isHidden);
+      hdr.classList.toggle('open', !isHidden);
     });
   });
 
-  // ---- Back to Top ----
+  // ---- Back to top ----
   const btt = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
-    btt.classList.toggle('visible', window.scrollY > 300);
-  });
+    btt.classList.toggle('show', window.scrollY > 300);
+  }, { passive: true });
   btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // ---- Email click ----
-  const emailEl = document.getElementById('biz-email');
-  if (emailEl) {
-    emailEl.style.cursor = 'pointer';
-    emailEl.addEventListener('click', () => {
-      window.location.href = `mailto:${biz.email}`;
-    });
-  }
 });
 
-// ---- Render Services ----
+/* ---- Render services list ---- */
 function renderServices(services) {
   const ul = document.getElementById('services-list');
   if (!ul) return;
-  ul.innerHTML = '';
-  services.forEach((svc, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="num-badge">${String(i+1).padStart(2,'0')}</span>${escHtml(svc)}`;
-    ul.appendChild(li);
-  });
+  if (!services || !services.length) {
+    ul.innerHTML = '<li style="color:#aaa;font-size:13px;padding:12px 0;">No services listed yet.</li>';
+    return;
+  }
+  ul.innerHTML = services.map((s, i) =>
+    `<li><span class="num-badge">${pad(i+1)}</span>${esc(s)}</li>`
+  ).join('');
 }
 
-// ---- Render Products ----
-function renderProducts(products, waNumber, bizName, logoImg) {
+/* ---- Render products ---- */
+function renderProducts(products, biz) {
   const container = document.getElementById('products-list');
   if (!container) return;
 
-  if (!products.length) {
+  if (!products || !products.length) {
     container.innerHTML = `
       <div class="empty-state">
         <div class="empty-icon">🛒</div>
-        <p>No products added yet. Check back soon!</p>
+        <p>No products yet. Check back soon!</p>
       </div>`;
     return;
   }
 
-  container.innerHTML = '';
-  products.forEach((product, i) => {
-    const div = document.createElement('div');
-    div.className = 'product-item';
-    div.innerHTML = `
-      <div class="product-number-row">
-        <span class="num-badge">${String(i+1).padStart(2,'0')}</span>
-        <h4>${escHtml(product.name)}</h4>
+  container.innerHTML = products.map((p, i) => `
+    <div class="product-entry">
+      <div class="product-num-row">
+        <span class="num-badge">${pad(i+1)}</span>
+        <span class="product-name">${esc(p.name)}</span>
       </div>
-      <div class="product-img-wrap">
-        ${product.image
-          ? `<img src="${escAttr(product.image)}" alt="${escAttr(product.name)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80'">`
-          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🥦</div>`
+      <div class="product-img-box">
+        ${p.image
+          ? `<img class="main-img" src="${eAttr(p.image)}" alt="${eAttr(p.name)}" loading="lazy"
+               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:72px;\'>🥦</div>'">`
+          : '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:72px;">🥦</div>'
         }
-        ${logoImg ? `<img class="product-watermark" src="${escAttr(logoImg)}" alt="logo">` : ''}
+        ${biz.logoImage
+          ? `<img class="product-watermark" src="${eAttr(biz.logoImage)}" alt="logo" onerror="this.style.display='none'">`
+          : ''
+        }
       </div>
-      <p class="product-description">${escHtml(product.description)}</p>
-      <a class="btn-inquiry" href="${makeWALink(waNumber, product.name, bizName)}" target="_blank" rel="noopener">
+      ${p.description
+        ? `<p class="product-desc">${esc(p.description)}</p>`
+        : ''
+      }
+      <a class="inquiry-btn" href="${waLink(biz.whatsapp, p.name, biz.name)}" target="_blank" rel="noopener">
         Inquiry
       </a>
-    `;
-    container.appendChild(div);
-  });
+    </div>
+  `).join('');
 }
 
-// ---- Build WhatsApp Link ----
-function makeWALink(waNumber, productName, bizName) {
-  const num = waNumber ? waNumber.replace(/\D/g,'') : '';
+/* ---- Build WhatsApp inquiry link ---- */
+function waLink(waNumber, productName, bizName) {
+  const num = (waNumber || '').replace(/\D/g, '');
   if (!num) return '#';
   const msg = encodeURIComponent(
-    `Hello *${bizName}*!\n\nI am interested in your product: *${productName}*\n\nPlease share more details, pricing, and availability.`
+    `Hello *${bizName}*!\n\nI'm interested in: *${productName}*\n\nPlease share details, pricing and availability. Thank you!`
   );
   return `https://wa.me/${num}?text=${msg}`;
 }
 
-// ---- Set Social Link ----
+/* ---- Social link helper ---- */
 function setSocial(id, url) {
   const el = document.getElementById(id);
   if (!el) return;
-  if (url) {
-    el.href = url;
+  if (url && url.trim() && url !== '#') {
+    el.href = url.trim();
     el.style.display = 'flex';
   } else {
     el.style.display = 'none';
   }
 }
 
-// ---- Helpers ----
-function set(id, value, attr) {
+/* ---- DOM helpers ---- */
+function setText(id, val) {
   const el = document.getElementById(id);
-  if (!el) return;
-  if (attr) el[attr] = value || '';
-  else el.textContent = value || '';
+  if (el) el.textContent = val || '';
 }
 
-function escHtml(str) {
-  return String(str || '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+function setAttr(id, attr, val) {
+  const el = document.getElementById(id);
+  if (el && val) el[attr] = val;
 }
 
-function escAttr(str) {
-  return String(str || '').replace(/"/g,'&quot;');
+function pad(n) {
+  return String(n).padStart(2, '0');
 }
 
-function showToast(msg, duration = 2500) {
-  let t = document.querySelector('.toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.className = 'toast';
-    document.body.appendChild(t);
-  }
+function esc(s) {
+  return String(s || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function eAttr(s) {
+  return String(s || '').replace(/"/g,'&quot;');
+}
+
+/* ---- Toast ---- */
+function showToast(msg, duration = 2800) {
+  const t = document.getElementById('toast') || document.querySelector('.toast');
+  if (!t) return;
   t.textContent = msg;
   t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), duration);
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), duration);
 }
